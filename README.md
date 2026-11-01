@@ -127,7 +127,7 @@ O JAR será gerado em `target/meu-projeto-1.0-SNAPSHOT.jar`, e as dependências 
 
 ## 🎥 Demonstração
 
-**Vídeo de apresentação:** [Acessar demonstração](https://github.com/JuniaBS/SistemaRestaurante/blob/feature/gerenciador-pedidos/COLE_AQUI_O_LINK_DO_VIDEO)
+**Vídeo de apresentação:** [Assistir no YouTube](https://youtu.be/L-mK7zRNUCM)
 
 O vídeo apresentará a execução da aplicação, a organização do código, um padrão de projeto utilizado e a execução de testes automatizados.
 
