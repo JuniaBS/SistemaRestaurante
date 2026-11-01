@@ -1,4 +1,8 @@
 package cardapio;
 
-public class ItemCardapio {
+public interface ItemCardapio {
+    String getDescricao();
+    double getPreco();
+    String getNomeBase();
+
 }
