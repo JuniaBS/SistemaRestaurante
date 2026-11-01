@@ -24,7 +24,7 @@ public class Lanche implements ItemCardapio {
     }
 
     public void setPreco(double preco) {
-        if (preco < 0) {
+        if (!Double.isFinite(preco) || preco < 0) {
             throw new IllegalArgumentException("Valor não pode ser negativo.");
         }
 
@@ -49,38 +49,47 @@ public class Lanche implements ItemCardapio {
 
     @Override
     public double getPreco() {
+
         return preco;
     }
 
     public boolean isQueijo() {
+
         return queijo;
     }
 
     public void setQueijo(boolean queijo) {
+
         this.queijo = queijo;
     }
 
     public boolean isAlface() {
+
         return alface;
     }
 
     public void setAlface(boolean alface) {
+
         this.alface = alface;
     }
 
     public boolean isTomate() {
+
         return tomate;
     }
 
     public void setTomate(boolean tomate) {
+
         this.tomate = tomate;
     }
 
     public boolean isCebola() {
+
         return cebola;
     }
 
     public void setCebola(boolean cebola) {
+
         this.cebola = cebola;
     }
 

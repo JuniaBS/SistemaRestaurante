@@ -26,6 +26,7 @@ public class GerenciadorPedidos {
     }
 
     public Collection<Pedido> getPedidos(){
+
         return pedidos.values();
     }
 
@@ -40,7 +41,9 @@ public class GerenciadorPedidos {
     }
 
     public boolean cancelarPedido(int numero) {
+
         return pedidos.remove(numero) != null;
+
     }
 
     public Set<String> obterCombinacoesDoDia() {

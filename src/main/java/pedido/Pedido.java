@@ -45,6 +45,7 @@ public class Pedido {
         }
 
         itens.add(item);
+
     }
 
     public double calcularTotal() {
@@ -55,16 +56,18 @@ public class Pedido {
         }
 
         return total;
+
     }
 
     public boolean removerItem(int indice) {
         if (indice < 0 || indice >= itens.size()) {
             return false;
+
         }
 
         itens.remove(indice);
         return true;
-    }
 
+    }
 
 }

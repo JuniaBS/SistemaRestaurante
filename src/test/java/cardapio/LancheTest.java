@@ -16,6 +16,29 @@ class LancheTest {
     }
 
     @Test
+    void deveRecusarPrecosNaoFinitos() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Lanche("X-Burger", Double.NaN)
+        );
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Lanche("X-Burger", Double.POSITIVE_INFINITY)
+        );
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Lanche("X-Burger", Double.NEGATIVE_INFINITY)
+        );
+    }
+
+    @Test
+    void deveAceitarPrecoValido() {
+        Lanche lanche = new Lanche("X-Burger", 16.00);
+
+        assertEquals(16.00, lanche.getPreco(), 0.001);
+    }
+
+    @Test
     void xBaconComCheddarCusta26() {
         ItemCardapio lanche = new ComCheddar(LancheFactory.xBacon());
 

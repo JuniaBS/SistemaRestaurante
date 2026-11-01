@@ -62,4 +62,9 @@ public class Caixa {
     public int getQuantidadeTransacoes() {
         return transacoes.size();
     }
+
+    public boolean possuiTransacaoDoPedido(int numeroPedido) {
+        return transacoes.stream()
+                .anyMatch(transacao -> transacao.getNumeroPedido() == numeroPedido);
+    }
 }

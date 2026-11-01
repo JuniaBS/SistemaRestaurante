@@ -29,7 +29,11 @@ public class Main {
                         int opcaoLanche = menu.lerOpcaoLanche();
 
                         Lanche lanche = sistema.criarLanche(opcaoLanche);
-                        ItemCardapio item = menu.personalizarLanche(lanche);
+                        ItemCardapio item = criarItemPersonalizado(
+                                menu,
+                                sistema,
+                                lanche
+                        );
 
                         sistema.adicionarItem(pedido, item);
 
@@ -68,8 +72,11 @@ public class Main {
                                 Lanche lanche =
                                         sistema.criarLanche(opcaoLanche);
 
-                                ItemCardapio item =
-                                        menu.personalizarLanche(lanche);
+                                ItemCardapio item = criarItemPersonalizado(
+                                        menu,
+                                        sistema,
+                                        lanche
+                                );
 
                                 sistema.adicionarItem(pedido, item);
 
@@ -108,8 +115,16 @@ public class Main {
                             }
 
                             case 3: {
-                                sistema.cancelarPedido(numero);
-                                menu.exibirMensagem("Pedido cancelado.");
+                                boolean cancelado = sistema.cancelarPedido(numero);
+
+                                if (cancelado) {
+                                    menu.exibirMensagem("Pedido cancelado.");
+                                } else {
+                                    menu.exibirMensagem(
+                                            "Não é possível cancelar um pedido já registrado no caixa."
+                                    );
+                                }
+
                                 modificando = false;
                                 break;
                             }
@@ -134,28 +149,9 @@ public class Main {
                     Set<String> lanchesBase =
                             sistema.obterLanchesBaseDoDia();
 
-                    boolean houveNovoRegistro = false;
+                    boolean houveNovoRegistro =
+                            sistema.registrarPedidosDoDia();
 
-                    for (Pedido pedido : sistema.listarPedidos()) {
-                        if (pedido.getItens().isEmpty()) {
-                            continue;
-                        }
-
-                        boolean registrado =
-                                sistema.registrarPedidoPago(pedido);
-
-                        if (registrado) {
-                            houveNovoRegistro = true;
-                        } else {
-                            menu.exibirMensagem(
-                                    "O pedido " + pedido.getNumero()
-                                            + " já foi registrado no caixa."
-                            );
-                        }
-                    }
-
-                    // Solicita gorjetas somente quando há pedidos novos
-                    // registrados neste fechamento.
                     if (houveNovoRegistro) {
                         double gorjeta = menu.lerValorGorjeta();
                         sistema.registrarGorjeta(gorjeta);
@@ -222,5 +218,23 @@ public class Main {
                     menu.exibirMensagem("Opção inválida.");
             }
         }
+    }
+
+    private static ItemCardapio criarItemPersonalizado(
+            MenuConsole menu,
+            RestauranteFacade sistema,
+            Lanche lanche
+    ) {
+        menu.exibirMenuPersonalizacao();
+
+        return sistema.personalizarLanche(
+                lanche,
+                menu.lerDesejaQueijo(),
+                menu.lerDesejaAlface(),
+                menu.lerDesejaTomate(),
+                menu.lerDesejaCebola(),
+                menu.lerDesejaCheddar(),
+                menu.lerDesejaBaconExtra()
+        );
     }
 }

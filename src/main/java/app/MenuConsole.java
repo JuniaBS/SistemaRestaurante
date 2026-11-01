@@ -1,7 +1,5 @@
 package app;
 
-import cardapio.ComBaconExtra;
-import cardapio.ComCheddar;
 import cardapio.ItemCardapio;
 import cardapio.Lanche;
 import pedido.Pedido;
@@ -27,12 +25,21 @@ public class MenuConsole {
     }
 
     public int lerOpcao() {
-        return lerNumero("Escolha uma opção: ", 0, 6);
+        return lerNumero
+                ("Escolha uma opção: ", 0, 6);
     }
 
     public String lerNomeCliente() {
-        System.out.print("Nome do cliente: ");
-        return scanner.nextLine();
+        while (true) {
+            System.out.print("Nome do cliente: ");
+            String nome = scanner.nextLine();
+
+            if (!nome.trim().isEmpty()) {
+                return nome;
+            }
+
+            System.out.println("O nome do cliente não pode ser vazio.");
+        }
     }
 
     public int lerOpcaoLanche() {
@@ -44,36 +51,38 @@ public class MenuConsole {
         return lerNumero("Escolha um lanche: ", 1, 3);
     }
 
-    public ItemCardapio personalizarLanche(Lanche lanche) {
+    public void exibirMenuPersonalizacao() {
+
         System.out.println("\n=== PERSONALIZE SEU LANCHE ===");
+    }
 
-        if (!perguntar("Deseja queijo? (s/n): ")) {
-            lanche.setQueijo(false);
-        }
+    public boolean lerDesejaQueijo() {
 
-        if (!perguntar("Deseja alface? (s/n): ")) {
-            lanche.setAlface(false);
-        }
+        return perguntar("Deseja queijo? (s/n): ");
+    }
 
-        if (!perguntar("Deseja tomate? (s/n): ")) {
-            lanche.setTomate(false);
-        }
+    public boolean lerDesejaAlface() {
 
-        if (!perguntar("Deseja cebola? (s/n): ")) {
-            lanche.setCebola(false);
-        }
+        return perguntar("Deseja alface? (s/n): ");
+    }
 
-        ItemCardapio item = lanche;
+    public boolean lerDesejaTomate() {
 
-        if (perguntar("Adicionar cheddar por R$ 4,00? (s/n): ")) {
-            item = new ComCheddar(item);
-        }
+        return perguntar("Deseja tomate? (s/n): ");
+    }
 
-        if (perguntar("Adicionar bacon extra por R$ 6,00? (s/n): ")) {
-            item = new ComBaconExtra(item);
-        }
+    public boolean lerDesejaCebola() {
 
-        return item;
+        return perguntar("Deseja cebola? (s/n): ");
+    }
+
+    public boolean lerDesejaCheddar() {
+        return perguntar("Adicionar cheddar por R$ 4,00? (s/n): ");
+    }
+
+    public boolean lerDesejaBaconExtra() {
+
+        return perguntar("Adicionar bacon extra por R$ 6,00? (s/n): ");
     }
 
     private boolean perguntar(String mensagem) {
@@ -111,6 +120,7 @@ public class MenuConsole {
     }
 
     public void exibirMensagem(String mensagem) {
+
         System.out.println(mensagem);
     }
 
@@ -131,6 +141,7 @@ public class MenuConsole {
     }
 
     public int lerOpcaoModificarPedido() {
+
         return lerNumero("Escolha uma opção: ", 0, 3);
     }
 
@@ -158,6 +169,7 @@ public class MenuConsole {
     }
 
     public double lerValorGorjeta() {
+
         return lerValor("Digite o valor das gorjetas recebidas: R$ ", true);
     }
 
@@ -235,6 +247,13 @@ public class MenuConsole {
             try {
                 double valor = Double.parseDouble(entrada);
 
+                if (!Double.isFinite(valor)) {
+                    System.out.println(
+                            "O valor deve ser um número finito."
+                    );
+                    continue;
+                }
+
                 if (valor < 0 || (!permiteZero && valor == 0)) {
                     System.out.println(
                             permiteZero
@@ -253,6 +272,7 @@ public class MenuConsole {
     }
 
     public double lerValorDespesa() {
+
         return lerValor("Digite o valor da despesa: R$ ", false);
     }
 }

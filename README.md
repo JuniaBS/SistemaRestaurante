@@ -1,32 +1,24 @@
 # 🍔 Sistema de Restaurante
 
-Aplicação desenvolvida em **Java** para gerenciar as operações de um restaurante, com foco na criação de pedidos, organização do cardápio, personalização de lanches e cálculo do total de vendas.
+Aplicação desenvolvida em **Java** para gerenciamento de pedidos de um restaurante, com cardápio personalizável, controle de pedidos e operações de caixa.
 
-O projeto foi desenvolvido para colocar em prática conceitos de **Programação Orientada a Objetos, estruturas de dados, princípios de organização de código e testes automatizados**, simulando situações comuns de um sistema de gerenciamento de pedidos.
+O projeto foi desenvolvido durante o bootcamp **ElasTech Java + IA**, com foco na prática de **Programação Orientada a Objetos, princípios SOLID, padrões de projeto, coleções e testes automatizados**, simulando funcionalidades de um sistema de gerenciamento de restaurante.
 
-## 🚀 Tecnologias
+## ✨ Funcionalidades
 
-- **Java** — desenvolvimento da aplicação.
-- **Maven** — gerenciamento de dependências e configuração do projeto.
-- **JUnit 5** — testes automatizados.
-- **Git e GitHub** — versionamento e gerenciamento do código-fonte.
-
-## 📌 Funcionalidades
-
-O sistema contempla as seguintes funcionalidades, conforme o escopo do projeto:
-
-- Cadastro e validação de lanches.
 - Criação de pedidos com identificação automática.
 - Associação de pedidos aos clientes.
-- Adição de itens e cálculo do valor total de cada pedido.
-- Consulta e gerenciamento dos pedidos.
-- Cálculo do total de vendas do dia.
-- Personalização de lanches por meio da retirada de ingredientes.
-- Adição de complementos, como cheddar e bacon extra.
-- Alteração e cancelamento de pedidos.
-- Identificação das diferentes combinações de lanches vendidos.
-- Tratamento de entradas inválidas.
-- Testes automatizados das regras de negócio.
+- Adição, alteração e cancelamento de pedidos.
+- Cardápio com X-Burger, X-Salada e X-Bacon.
+- Personalização de lanches por remoção de ingredientes.
+- Adição de cheddar e bacon extra.
+- Cálculo do valor dos pedidos e do total de vendas do dia.
+- Identificação de combinações diferentes de lanches.
+- Contagem de lanches-base vendidos.
+- Validação de nomes e tratamento de entradas inválidas.
+- Registro de gorjetas e despesas.
+- Consulta de entradas, saídas e saldo do caixa.
+- Prevenção de transações duplicadas para o mesmo pedido.
 
 ## 🍟 Cardápio
 
@@ -43,72 +35,102 @@ O sistema contempla as seguintes funcionalidades, conforme o escopo do projeto:
 | Cheddar | R$ 4,00 |
 | Bacon extra | R$ 6,00 |
 
-## 🧩 Organização e arquitetura
+## 🛠️ Tecnologias
 
-O projeto utiliza a separação de responsabilidades para manter o código organizado e facilitar sua manutenção.
+- Java 22
+- Maven
+- JUnit 5
+- Mockito
+- Lombok
+- Git e GitHub
+
+As versões e configurações das dependências estão definidas no `pom.xml`.
+
+## 🏗️ Arquitetura e organização
+
+O projeto utiliza separação de responsabilidades para organizar a aplicação e facilitar sua manutenção.
 
 | Pacote | Responsabilidade |
 |---|---|
-| `app` | Inicialização, menu de console e coordenação das operações. |
-| `cardapio` | Representação dos lanches, itens do cardápio e adicionais. |
-| `pedido` | Criação, consulta e gerenciamento dos pedidos. |
-| `financeiro` | Recursos complementares relacionados ao caixa e às transações. |
-| `util` | Métodos auxiliares e validações, quando necessários. |
+| `app` | Inicialização, interação com o usuário e coordenação dos casos de uso. |
+| `cardapio` | Lanches, itens do cardápio, Factory e Decorators. |
+| `pedido` | Representação e gerenciamento dos pedidos. |
+| `financeiro` | Caixa e transações financeiras. |
 
-### Conceitos aplicados
+### Principais classes
 
-**Programação Orientada a Objetos (POO)**
+- **Main:** inicia a aplicação e controla o fluxo principal.
+- **MenuConsole:** realiza a leitura de dados e exibe mensagens no console.
+- **RestauranteFacade:** coordena as operações do sistema.
+- **LancheFactory:** cria os lanches padrão.
+- **ComCheddar e ComBaconExtra:** adicionam complementos utilizando o padrão Decorator.
+- **GerenciadorPedidos:** cria, busca, lista, cancela e resume pedidos.
+- **Caixa:** registra entradas, gorjetas, despesas e saldo.
+- **Transacao:** representa uma entrada financeira vinculada a um pedido.
 
-Utilização de classes, encapsulamento e separação de responsabilidades para representar os elementos do sistema.
+## 🧠 Conceitos e padrões aplicados
 
-**Collections Framework**
+### Programação Orientada a Objetos
 
-Utilização de estruturas de dados como `ArrayList`, `HashMap` e `HashSet` para armazenar, consultar e organizar informações.
+Uso de classes, encapsulamento e separação de responsabilidades para representar os elementos do sistema.
 
-**Factory**
+### Factory
 
-Centralização da criação dos lanches padrão, reduzindo o acoplamento entre a criação dos objetos e as demais partes do sistema.
+A `LancheFactory` centraliza a criação dos lanches padrão e permite criar novas instâncias para cada pedido.
 
-**Decorator**
+### Decorator
 
-Composição de adicionais sobre os itens do cardápio, permitindo acrescentar descrições e valores sem modificar diretamente a classe original do lanche.
+Os decorators `ComCheddar` e `ComBaconExtra` acrescentam descrição e preço aos itens do cardápio sem modificar diretamente o lanche-base.
 
-**Testes automatizados**
+### Collections Framework
 
-Utilização do JUnit 5 para verificar validações e regras de negócio.
+Utilização de `ArrayList`, `HashMap`, `HashSet` e `Set` para armazenar e organizar pedidos, itens, transações e combinações de lanches.
 
-## 💻 Como executar
+### Testes automatizados
+
+Utilização de JUnit 5 e Mockito para apoiar a validação das funcionalidades e regras de negócio.
+
+## 🚀 Como executar
 
 ### Pré-requisitos
 
-- JDK compatível com a versão configurada no projeto.
-- Maven.
-- IntelliJ IDEA ou outra IDE compatível com Java.
+- JDK 22
+- Maven
+- IntelliJ IDEA ou outra IDE compatível com Java
 
-### Executando pela IDE
+### Executar pela IDE
 
 1. Clone o repositório.
-2. Abra a pasta que contém o arquivo `pom.xml` no IntelliJ IDEA.
+2. Abra no IntelliJ IDEA a pasta que contém o `pom.xml`.
 3. Aguarde o Maven carregar as dependências.
-4. Localize a classe `Main`, no pacote `app`.
-5. Execute o método `main()` para iniciar a aplicação.
+4. Execute a classe `app.Main`.
 
-### Executando os testes
+### Executar os testes
 
-No terminal, dentro da pasta do projeto, execute:
+Na pasta do projeto, execute:
 
 ```bash
 mvn test
 ```
 
-O comando compila o projeto e executa os testes configurados no Maven.
+### Gerar o pacote
+
+Para compilar o projeto, executar os testes e gerar o JAR:
+
+```bash
+mvn package
+```
+
+O JAR será gerado em `target/meu-projeto-1.0-SNAPSHOT.jar`, e as dependências serão copiadas para `target/libs`.
+
+> **Nota:** o JAR gerado não inclui automaticamente as dependências. Para executar a aplicação empacotada, utilize a IDE ou configure o classpath com as bibliotecas de `target/libs`.
 
 ## 🎥 Demonstração
 
-**Vídeo de apresentação:** [Acessar demonstração](COLE_AQUI_O_LINK_DO_VIDEO)
+**Vídeo de apresentação:** [Acessar demonstração](https://github.com/JuniaBS/SistemaRestaurante/blob/feature/gerenciador-pedidos/COLE_AQUI_O_LINK_DO_VIDEO)
 
-A demonstração apresenta a execução da aplicação, a organização do código, a explicação de um padrão de projeto e a execução de um teste automatizado.
+O vídeo apresentará a execução da aplicação, a organização do código, um padrão de projeto utilizado e a execução de testes automatizados.
 
 ## 👩‍💻 Sobre o projeto
 
-Projeto acadêmico desenvolvido para consolidar conhecimentos em Java e praticar conceitos importantes para o desenvolvimento de aplicações back-end, incluindo orientação a objetos, coleções, organização de responsabilidades e testes automatizados.
+Projeto acadêmico desenvolvido durante o bootcamp ElasTech Java + IA para consolidar conhecimentos em Java e praticar conceitos relevantes para o desenvolvimento back-end, incluindo orientação a objetos, padrões de projeto, coleções, organização de responsabilidades e testes automatizados.
